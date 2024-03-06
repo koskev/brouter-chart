@@ -8,6 +8,7 @@ ingress:
     secret: brouter-tls
 
 update:
+  enabled: true
   url: http://brouter.de/brouter/segments4
 
 brouter:
