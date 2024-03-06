@@ -1,11 +1,10 @@
-
 ingress:
   enabled: true
-  ingress_class: nginx-external
-  host: brouter.kokev.de
+  ingress_class: nginx
+  host: brouter.example.com
   tls:
     enabled: true
-    issuer: "kokev-issuer"
+    issuer: null
     secret: brouter-tls
 
 update:
@@ -16,19 +15,10 @@ brouter:
     repository: ghcr.io/koskev/brouter
     pullPolicy: IfNotPresent
     tag: "2024.03.06"
-  volumes:
-    - name: segments
-      hostPath:
-        path: /mnt/shared_data/k8s/brouter/segments4
+  volumes: []
 
 brouter_web:
   image:
     repository: ghcr.io/koskev/brouter-web
     pullPolicy: IfNotPresent
     tag: "2024.03.06"
-
-
-
-
-
-
