@@ -24,7 +24,7 @@ spec:
         imagePullPolicy: "{{ .Values.brouter.image.pullPolicy }}"
         resources:
           requests:
-            memory: "128Mi"
+            memory: "350Mi"
         env:
           - name: CLASSPATH
             value: "/brouter.jar"

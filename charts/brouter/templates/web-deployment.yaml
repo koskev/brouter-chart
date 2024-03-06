@@ -35,7 +35,7 @@ spec:
           subPath: config.js
         resources:
           requests:
-            memory: "128Mi"
+            memory: "16Mi"
       volumes:
       - name: brouter-web-config
         configMap:
