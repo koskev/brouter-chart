@@ -3,6 +3,16 @@ entries:
   brouter-web:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-03-06T20:19:07.707437198Z"
+    description: A Helm chart for Kubernetes
+    digest: 7efdf3574ff9043eec589c1c8aa8a2c0198b86338e552fca8fc8ecc566600d18
+    name: brouter-web
+    type: application
+    urls:
+    - https://github.com/koskev/brouter-chart/releases/download/brouter-web-0.1.2/brouter-web-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-03-06T20:16:44.144893924Z"
     description: A Helm chart for Kubernetes
     digest: 9231a35678fef95775f20e019866ecc37d1f31fa13e5d9ec717ef0c487051d46
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://github.com/koskev/brouter-chart/releases/download/brouter-web-0.1.0/brouter-web-0.1.0.tgz
     version: 0.1.0
-generated: "2024-03-06T20:16:44.144902751Z"
+generated: "2024-03-06T20:19:07.707452166Z"
