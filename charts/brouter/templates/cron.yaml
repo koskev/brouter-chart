@@ -16,7 +16,7 @@ spec:
             command:
             - /bin/sh
             - -c
-            - "apk update && apk add wget && cd /segments4 && for f in *.rd5; do wget -N {{ .Values.update.url }}/$f; done"
+            - "apk update && apk add wget && cd /segments4 && for f in *.rd5; do wget -N {{ .Values.brouter.updater.url }}/$f; done"
             volumeMounts:
               - mountPath: /segments4
                 name: segments
