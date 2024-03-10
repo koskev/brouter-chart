@@ -23,6 +23,36 @@ spec:
                   number: 80
             path: /
 {{ end }}
+          - pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}-api-service
+                port:
+                  number: 17777
+            path: /brouter
+{{- if .Values.ingress.tls.enabled }}
+  tls:
+    - hosts:
+      - {{ .Values.ingress.host }}
+      secretName: {{ .Values.ingress.tls.secret }}
+{{ end }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-ingress
+  namespace: {{ .Release.Namespace }}
+{{- if and .Values.ingress.tls.enabled .Values.ingress.tls.issuer }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.tls.issuer }}
+    nginx.ingress.kubernetes.io/rewrite-target: /
+{{ end }}
+spec:
+  ingressClassName: {{ .Values.ingress.ingress_class }}
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
 {{- if .Values.brouter_react.enabled }}
           - pathType: Prefix
             backend:
@@ -32,13 +62,6 @@ spec:
                   number: 80
             path: /beta
 {{ end }}
-          - pathType: Prefix
-            backend:
-              service:
-                name: {{ .Release.Name }}-api-service
-                port:
-                  number: 17777
-            path: /brouter
 {{- if .Values.ingress.tls.enabled }}
   tls:
     - hosts:
