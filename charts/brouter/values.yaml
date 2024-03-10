@@ -7,9 +7,6 @@ ingress:
     issuer: null
     secret: brouter-tls
 
-update:
-  enabled: true
-  url: http://brouter.de/brouter/segments4
 
 brouter:
   enabled: true
@@ -18,6 +15,9 @@ brouter:
     pullPolicy: IfNotPresent
     tag: "2024.03.07"
   volumes: []
+  updater:
+    enabled: true
+    url: http://brouter.de/brouter/segments4
 
 brouter_web:
   enabled: true
