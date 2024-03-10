@@ -1,0 +1,36 @@
+{{- if .Values.brouter_react.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-react-deployment
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Release.Name }}-react
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-react
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-react
+    spec:
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+      - name: {{ .Release.Name }}-react
+        image: "{{ .Values.brouter_react.image.repository }}:{{ .Values.brouter_react.image.tag }}"
+        imagePullPolicy: "{{ .Values.brouter_react.image.pullPolicy }}"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 60
+          timeoutSeconds: 10
+          failureThreshold: 5
+        resources:
+          requests:
+            memory: "16Mi"
+{{ end }}
