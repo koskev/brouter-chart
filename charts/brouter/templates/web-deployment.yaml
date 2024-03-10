@@ -1,3 +1,4 @@
+{{- if .Values.brouter_web.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -40,3 +41,4 @@ spec:
       - name: brouter-web-config
         configMap:
           name: {{ .Release.Name }}-web-config
+{{ end }}

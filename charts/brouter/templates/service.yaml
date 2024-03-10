@@ -15,6 +15,7 @@ spec:
       targetPort: 17777
   type: ClusterIP
 ---
+{{- if .Values.brouter_web.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -31,3 +32,23 @@ spec:
       port: 80
       targetPort: 80
   type: ClusterIP
+{{ end }}
+---
+{{- if .Values.brouter_react.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-react-service
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Release.Name }}-react
+spec:
+  selector:
+    app: {{ .Release.Name }}-react
+  ports:
+    - name: web
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
+{{ end }}
