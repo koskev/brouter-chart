@@ -3,6 +3,16 @@ entries:
   brouter:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-03-10T10:45:04.269669451Z"
+    description: A Helm chart for deploying a brouter and brouter-web instance
+    digest: bf4faadbf12dd611f492264065e7f07b71af10e7afef55e1e3bfa688702a2e1c
+    name: brouter
+    type: application
+    urls:
+    - https://github.com/koskev/brouter-chart/releases/download/brouter-0.1.4/brouter-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-03-06T20:21:43.637974879Z"
     description: A Helm chart for deploying a brouter and brouter-web instance
     digest: 561e47aa575341145e12ecbf77e9060c9597caf6da9912b38c8d18904c1dddfa
@@ -42,4 +52,4 @@ entries:
     urls:
     - https://github.com/koskev/brouter-chart/releases/download/brouter-web-0.1.0/brouter-web-0.1.0.tgz
     version: 0.1.0
-generated: "2024-03-06T20:21:43.637996039Z"
+generated: "2024-03-10T10:45:04.269686062Z"
