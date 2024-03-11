@@ -24,7 +24,7 @@ brouter_web:
   image:
     repository: ghcr.io/koskev/brouter-web
     pullPolicy: IfNotPresent
-    tag: "2024.03.10"
+    tag: "2024.03.11"
 
 brouter_react:
   enabled: true
