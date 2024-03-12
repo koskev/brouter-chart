@@ -55,8 +55,7 @@ spec:
       http:
         paths:
 {{- if .Values.brouter_react.enabled }}
-          - pathType: Prefix
-            backend:
+          - backend:
               service:
                 name: {{ .Release.Name }}-react-service
                 port:
