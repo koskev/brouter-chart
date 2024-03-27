@@ -32,7 +32,12 @@ spec:
 {{ end }}
 {{- end }}
 
+{{- if .Values.brouter.enabled }}
 {{- include "brouteringress" (dict "Release" .Release "ingress" (merge .Values.brouter.ingress .Values.ingress) "name" "brouter") -}}
+{{- end }}
+{{- if .Values.brouter_web.enabled }}
 {{- include "brouteringress" (dict "Release" .Release "ingress" (merge .Values.brouter_web.ingress .Values.ingress) "name" "brouter-web") -}}
+{{- end }}
+{{- if .Values.brouter_react.enabled }}
 {{- include "brouteringress" (dict "Release" .Release "ingress" (merge .Values.brouter_react.ingress .Values.ingress) "name" "brouter-react") -}}
-
+{{- end }}
