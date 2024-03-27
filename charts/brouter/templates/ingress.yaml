@@ -22,6 +22,7 @@ spec:
                 port:
                   number: {{ .ingress.port }}
             path: {{ .ingress.path }}
+            pathType: Prefix
 {{- if .ingress.tls.enabled }}
   tls:
     - hosts:
