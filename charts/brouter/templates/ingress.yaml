@@ -1,72 +1,37 @@
-{{- if .Values.ingress.enabled }}
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: {{ .Release.Name }}-ingress
-  namespace: {{ .Release.Namespace }}
-{{- if and .Values.ingress.tls.enabled .Values.ingress.tls.issuer }}
-  annotations:
-    cert-manager.io/cluster-issuer: {{ .Values.ingress.tls.issuer }}
-{{ end }}
-spec:
-  ingressClassName: {{ .Values.ingress.ingress_class }}
-  rules:
-    - host: {{ .Values.ingress.host }}
-      http:
-        paths:
-{{- if .Values.brouter_web.enabled }}
-          - pathType: Prefix
-            backend:
-              service:
-                name: {{ .Release.Name }}-web-service
-                port:
-                  number: 80
-            path: /
-{{ end }}
-          - pathType: Prefix
-            backend:
-              service:
-                name: {{ .Release.Name }}-api-service
-                port:
-                  number: 17777
-            path: /brouter
-{{- if .Values.ingress.tls.enabled }}
-  tls:
-    - hosts:
-      - {{ .Values.ingress.host }}
-      secretName: {{ .Values.ingress.tls.secret }}
-{{ end }}
+{{- define "brouteringress" -}}
+{{- if .ingress.enabled }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Release.Name }}-react-ingress
+  name: {{ .Release.Name }}-{{ .name }}-ingress
   namespace: {{ .Release.Namespace }}
-{{- if and .Values.ingress.tls.enabled .Values.ingress.tls.issuer }}
+{{- if and .ingress.tls.enabled .ingress.tls.issuer }}
   annotations:
-    cert-manager.io/cluster-issuer: {{ .Values.ingress.tls.issuer }}
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    cert-manager.io/cluster-issuer: {{ .ingress.tls.issuer }}
 {{ end }}
 spec:
-  ingressClassName: {{ .Values.ingress.ingress_class }}
+  ingressClassName: {{ .ingress.ingress_class }}
   rules:
-    - host: {{ .Values.ingress.host }}
+    - host: {{ .ingress.host }}
       http:
         paths:
-{{- if .Values.brouter_react.enabled }}
           - backend:
               service:
-                name: {{ .Release.Name }}-react-service
+                name: {{ .Release.Name }}-{{ .name }}-service
                 port:
-                  number: 80
-            path: /beta(/|$)(.*)
-            pathType: ImplementationSpecific
-{{ end }}
-{{- if .Values.ingress.tls.enabled }}
+                  number: {{ .ingress.port }}
+            path: {{ .ingress.path }}
+{{- if .ingress.tls.enabled }}
   tls:
     - hosts:
-      - {{ .Values.ingress.host }}
-      secretName: {{ .Values.ingress.tls.secret }}
+      - {{ .ingress.host }}
+      secretName: {{ .ingress.tls.secret }}
 {{ end }}
 {{ end }}
+{{- end }}
+
+{{- include "brouteringress" (dict "Release" .Release "ingress" (merge .Values.brouter.ingress .Values.ingress) "name" "brouter") -}}
+{{- include "brouteringress" (dict "Release" .Release "ingress" (merge .Values.brouter_web.ingress .Values.ingress) "name" "brouter-web") -}}
+{{- include "brouteringress" (dict "Release" .Release "ingress" (merge .Values.brouter_react.ingress .Values.ingress) "name" "brouter-react") -}}
+

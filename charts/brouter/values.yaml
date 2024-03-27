@@ -1,15 +1,17 @@
+# Can be overwritten by each module
 ingress:
-  enabled: true
+  enabled: false
   ingress_class: nginx
   host: brouter.example.com
+  path: /
+  port: 80
   tls:
     enabled: true
     issuer: null
     secret: brouter-tls
 
-
 brouter:
-  enabled: true
+  enabled: false
   image:
     repository: ghcr.io/koskev/brouter
     pullPolicy: IfNotPresent
@@ -18,16 +20,19 @@ brouter:
   updater:
     enabled: true
     url: http://brouter.de/brouter/segments4
+  ingress:
+    path: /brouter
+    port: 17777
 
 brouter_web:
-  enabled: true
+  enabled: false
   image:
     repository: ghcr.io/koskev/brouter-web
     pullPolicy: IfNotPresent
     tag: "2024.03.12"
 
 brouter_react:
-  enabled: true
+  enabled: false
   image:
     repository: ghcr.io/koskev/brouter-react
     pullPolicy: IfNotPresent
