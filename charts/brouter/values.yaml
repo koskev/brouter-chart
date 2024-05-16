@@ -15,7 +15,7 @@ brouter:
   image:
     repository: ghcr.io/koskev/brouter
     pullPolicy: IfNotPresent
-    tag: "2024.05.06"
+    tag: "2024.05.13"
   volumes: []
   updater:
     enabled: true
