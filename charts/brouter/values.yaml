@@ -37,5 +37,5 @@ brouter_react:
   image:
     repository: ghcr.io/koskev/brouter-react
     pullPolicy: IfNotPresent
-    tag: "2024.05.16"
+    tag: "2024.05.27"
   ingress: {}
