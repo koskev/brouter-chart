@@ -29,7 +29,7 @@ brouter_web:
   image:
     repository: ghcr.io/koskev/brouter-web
     pullPolicy: IfNotPresent
-    tag: "2024.06.03"
+    tag: "2024.06.17"
   ingress: {}
 
 brouter_react:
